@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.trim demo</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<pre id="original">
+
+</pre>
+ 
+<script>
+
+$.getJSON('https://online.metro-cc.ru/virtual/regulyarniy-katalog?price_from=0&price_to=300000&brands=&in_stock=1&page=1&sorting=0&limit=1000&format=j&_=1454576009756').then(function(response){
+	var results = [];
+	$.each(response.data.items, function(index, element){
+	 if($(element).filter(':contains(супер)').length){
+	 	var result = $.trim($(element).find('.catalog-i_title').text()) +'-' + $.trim($(element).find('.current .val .int').text());
+	 	results.push(result);
+	  	console.log(result);
+	 }
+	})
+	$('#original').html(results.join("\n"))
+})
+</script>
+ 
+</body>
+</html>
